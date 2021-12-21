@@ -15,7 +15,7 @@ def extract_arg(arg):
 @bot.message_handler(commands=['weather', 'help'])
 def send_welcome(message):
     city = extract_arg(message.text)[0]
-    url = 'https://wttr.in/{}?format=2'.format(city)
+    url = 'https://wttr.in/{}?format=4'.format(city)
     res = requests.get(url).text
     bot.send_message(message.chat.id, res)
 
@@ -24,7 +24,7 @@ def send_welcome(message):
 def query_text(query):
     try:
         city = query.query
-        url = 'https://wttr.in/{}?format=3'.format(city)
+        url = 'https://wttr.in/{}?format=4'.format(city)
         res = requests.get(url).text
         weather_icon = "https://d279m997dpfwgl.cloudfront.net/wp/2017/12/weather_album-art-1000x1000.jpg"
         weather = types.InlineQueryResultArticle(
@@ -34,7 +34,7 @@ def query_text(query):
                 message_text="{}".format(res)),
             thumb_url=weather_icon, thumb_width=48, thumb_height=48
         )
-        bot.answer_inline_query(query.id, [weather])
+        bot.answer_inline_query(query.id, [weather], cache_time=1)
     except Exception as e:
         print(e)
 
