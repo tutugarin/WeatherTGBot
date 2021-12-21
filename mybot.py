@@ -15,7 +15,7 @@ def extract_arg(arg):
 @bot.message_handler(commands=['weather', 'help'])
 def send_welcome(message):
     city = extract_arg(message.text)[0]
-    url = 'https://wttr.in/{}?format=3'.format(city)
+    url = 'https://wttr.in/{}?format=2'.format(city)
     res = requests.get(url).text
     bot.send_message(message.chat.id, res)
 
