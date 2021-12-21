@@ -26,11 +26,13 @@ def query_text(query):
         city = query.query
         url = 'https://wttr.in/{}?format=3'.format(city)
         res = requests.get(url).text
+        weather_icon = "https://d279m997dpfwgl.cloudfront.net/wp/2017/12/weather_album-art-1000x1000.jpg"
         weather = types.InlineQueryResultArticle(
             id='1', title="Погода",
             description="Погода в городе: {}".format(city),
             input_message_content=types.InputTextMessageContent(
-                message_text="{}".format(res))
+                message_text="{}".format(res)),
+            thumb_url=weather_icon, thumb_width=48, thumb_height=48
         )
         bot.answer_inline_query(query.id, [weather])
     except Exception as e:
