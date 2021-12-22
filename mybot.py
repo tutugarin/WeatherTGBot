@@ -28,7 +28,7 @@ def query_text(query):
     try:
         url = 'https://v2.wttr.in/{}?format=%t+%c+%f+%w+%p+%P'.format(city)
         data = (requests.get(url).text).split()
-        print(city, data)
+        # print(city, data)
 
         actual = data[0]
         smile = data[1]
