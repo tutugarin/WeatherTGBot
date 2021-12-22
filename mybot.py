@@ -41,7 +41,13 @@ def query_text(query):
             id='1', title="Detailed Weather",
             description="Weather in {}".format(city),
             input_message_content=types.InputTextMessageContent(
-                message_text="😱Weather in {}🙄\n{}Actual {}\n{}Feels Like {}\n🌬Wind: {}\n💧Precipitation: {}\n🧭Pressure: {}\n".format(city, smile, actual, smile, feelslike, Wind, Precipitation, Pressure)),
+                message_text="😱Weather in {}🙄\n"
+                             "{}Actual {}\n"
+                             "{}Feels Like {}\n"
+                             "🌬Wind: {}\n"
+                             "💧Precipitation: {}\n"
+                             "🧭Pressure: {}\n"
+                             "".format(city, smile, actual, smile, feelslike, Wind, Precipitation, Pressure)),
             thumb_url=info_icon, thumb_width=48, thumb_height=48
         )
 
