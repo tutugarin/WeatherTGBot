@@ -1,37 +1,41 @@
-from telebot import *
 import requests
 import re
 import os
+from telebot import *
 from random import randrange
 
 bot = telebot.TeleBot(os.environ['token'])
 
+
 @bot.message_handler(commands=['help', 'help'])
 def send_cock(message):
-    res = "NAME\n"\
-        "\t\t @FairBoobSize_bot\n"\
-        "\n"\
-        "SYNOPSIS\n"\
-        "\t\t@FairBoobSize_bot [город]\n"\
-        "\n"\
-        "DESCRIPTION\n"\
-        "\t\tБот имеет две основных функции:\n"\
-        "\t\t\t\t1) говорить погоду в указанном городе.\n"\
-        "\t\t\t\t\t\tЕсли город не указан,\n"\
-        "\t\t\t\t\t\tто по умолчанию стоит Москва\n"\
-        "\t\t\t\t2) Ищет в округе горячих парней.\n"\
-        "\t\t\t\t\t\tТак получилось, что алгоритм,\n"\
-        "\t\t\t\t\t\tиспользуемый в боте,\n"\
-        "\t\t\t\t\t\tсчитает только своего создателя\n"\
-        "\t\t\t\t\t\tдостаточно горячим.\n"
+    res = "NAME\n" \
+          "\t\t @FairBoobSize_bot\n" \
+          "\n" \
+          "SYNOPSIS\n" \
+          "\t\t@FairBoobSize_bot [город]\n" \
+          "\n" \
+          "DESCRIPTION\n" \
+          "\t\tБот имеет две основных функции:\n" \
+          "\t\t\t\t1) говорить погоду в указанном городе.\n" \
+          "\t\t\t\t\t\tЕсли город не указан,\n" \
+          "\t\t\t\t\t\tто по умолчанию стоит Москва\n" \
+          "\t\t\t\t2) Ищет в округе горячих парней.\n" \
+          "\t\t\t\t\t\tТак получилось, что алгоритм,\n" \
+          "\t\t\t\t\t\tиспользуемый в боте,\n" \
+          "\t\t\t\t\t\tсчитает только своего создателя\n" \
+          "\t\t\t\t\t\tдостаточно горячим.\n"
     bot.reply_to(message, res)
+
 
 @bot.message_handler(commands=['cocksize', 'help'])
 def send_cock(message):
     bot.reply_to(message, randrange(40))
 
+
 def extract_arg(arg):
     return arg.split()[1:]
+
 
 @bot.message_handler(commands=['weather', 'help'])
 def send_weather(message):
@@ -40,12 +44,13 @@ def send_weather(message):
     res = requests.get(url).text
     bot.send_message(message.chat.id, res)
 
+
 def convert_to_celsius(temp):
-    if temp[-1] == 'C':
-        return temp
-    value = int((int(temp[:-2]) - 32) * 5 / 9)
-    temp = str(value) + "°C"
+    if temp[-1] == 'F':
+        value = int((int(temp[:-2]) - 32) * 5 / 9)
+        temp = str(value) + "°C"
     return temp
+
 
 def convert_to_mps(sp):
     if sp[-3:] == "mph":
@@ -59,6 +64,7 @@ def convert_to_mps(sp):
         return sp
     return sp
 
+
 @bot.inline_handler(func=lambda query: True)
 def query_text(query):
     if (len(query.query) == 0):
@@ -68,7 +74,7 @@ def query_text(query):
     try:
         url = 'https://v2.wttr.in/{}?format=%t+%c+%f+%w+%p+%P'.format(city)
         data = (requests.get(url).text).split()
-        # print(city, data)
+        print(city, data)
 
         actual = convert_to_celsius(data[0])
         smile = data[1]
@@ -96,7 +102,7 @@ def query_text(query):
             id='2', title="Парни",
             description="Горячие парни в округе",
             input_message_content=types.InputTextMessageContent(
-                message_text="!!!Найден 1 горячий парень:\n"
+                message_text="Найден 1 горячий парень:\n"
                              "1) Ершов Иван - 🔥горячий парень🔥\n"
                              "😉Девочки - пишите @tutugarin\n"
                              "🤡Маличики - не пишите"),
@@ -129,5 +135,6 @@ def query_text(query):
         bot.answer_inline_query(query.id, [info, vanya, help], cache_time=1)
     except Exception as e:
         print(e)
+
 
 bot.infinity_polling()
