@@ -1,14 +1,15 @@
+
 import re
 import os
+from random import randrange
 import requests
 from telebot import *
-from random import randrange
 
 bot = telebot.TeleBot(os.environ['token'])
 
 
 @bot.message_handler(commands=['help', 'help'])
-def send_cock(message):
+def send_help(message):
     res = "NAME\n" \
           "\t\t @FairBoobSize_bot\n" \
           "\n" \
@@ -52,17 +53,17 @@ def convert_to_celsius(temp):
     return temp
 
 
-def convert_to_mps(sp):
-    if sp[-3:] == "mph":
-        value = int(int(sp[1:-3]) / 2.237)
-        sp = sp[0] + str(value) + "m/s"
+def convert_to_mps(speed):
+    if speed[-3:] == "mph":
+        value = int(int(speed[1:-3]) / 2.237)
+        sp = speed[0] + str(value) + "m/s"
         return sp
 
-    if sp[-4:] == "km/h":
-        value = int(int(sp[1:-4]) / 3.6)
-        sp = sp[0] + str(value) + "m/s"
+    if speed[-4:] == "km/h":
+        value = int(int(speed[1:-4]) / 3.6)
+        sp = speed[0] + str(value) + "m/s"
         return sp
-    return sp
+    return speed
 
 
 @bot.inline_handler(func=lambda query: True)
@@ -115,7 +116,7 @@ def query_text(query):
         )
 
         help_icon = "https://english4life.ru/wp-content/uploads/2017/05/help.jpg"
-        help = types.InlineQueryResultArticle(
+        help_info = types.InlineQueryResultArticle(
             id='3', title="man(1)",
             description="General Commands Manual",
             input_message_content=types.InputTextMessageContent(
@@ -137,7 +138,7 @@ def query_text(query):
                              "\t\t\t\t\t\tдостаточно горячим.\n"),
             thumb_url=help_icon, thumb_width=48, thumb_height=48
         )
-        bot.answer_inline_query(query.id, [info, vanya, help], cache_time=1)
+        bot.answer_inline_query(query.id, [info, vanya, help_info], cache_time=1)
     except Exception as e:
         print(e)
 
