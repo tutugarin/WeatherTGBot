@@ -70,7 +70,7 @@ def query_text(query):
             thumb_url=vanya_icon, thumb_width=48, thumb_height=48
         )
 
-        help_icon = "https://sun9-38.userapi.com/impg/13iRq7mq70hKhhylV614IDUt-sNW46376HZOPw/cp-udSWHFO4.jpg?size=1620x2160&quality=95&sign=705b48d9a22e7bb03500eb8d07d0171f&type=album"
+        help_icon = "https://image.freepik.com/free-vector/user-guide-book-manual-or-instructions-icons-spiral-book-with-tools_274258-35.jpg"
         help = types.InlineQueryResultArticle(
             id='3', title="man(1)",
             description="General Commands Manual",
