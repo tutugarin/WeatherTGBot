@@ -88,7 +88,7 @@ def query_text(query):
                              "\t\t2) Ищет в округе горячий парней.\n"
                              "\t\tТак получилось, что алгоритм, используемый в боте,\n"
                              "\t\tсчитает только своего создателя достаточно горячим.\n"),
-            thumb_url=vanya_icon, thumb_width=48, thumb_height=48
+            thumb_url=help_icon, thumb_width=48, thumb_height=48
         )
         bot.answer_inline_query(query.id, [info, vanya, help], cache_time=1)
     except Exception as e:
