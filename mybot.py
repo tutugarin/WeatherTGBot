@@ -19,22 +19,27 @@ def send_weather(message):
     res = requests.get(url).text
     bot.send_message(message.chat.id, res)
 
-
+def convert_celsius(temp):
+    if (temp[-1] == 'C'):
+        return temp
+    value = int(temp[:-2]) * 9 / 5 + 32
+    temp = value + "°C"
+    return temp
 
 @bot.inline_handler(func=lambda query: True)
 def query_text(query):
     if (len(query.query) == 0):
-        city = "Moscow"
+        city = "Moscow, Russia"
     else:
         city = query.query
     try:
         url = 'https://v2.wttr.in/{}?format=%t+%c+%f+%w+%p+%P'.format(city)
         data = (requests.get(url).text).split()
-        print(city, data)
+        # print(city, data)
 
-        actual = data[0]
+        actual = convert_celsius(data[0])
         smile = data[1]
-        feelslike = data[2]
+        feelslike = convert_celsius(data[2])
         Wind = data[3]
         Precipitation = data[4]
         Pressure = data[5]
