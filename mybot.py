@@ -22,8 +22,8 @@ def send_weather(message):
 def convert_celsius(temp):
     if (temp[-1] == 'C'):
         return temp
-    value = int(temp[:-2]) * 9 / 5 + 32
-    temp = value + "°C"
+    value = int(int(temp[:-2]) * 9 / 5 + 32)
+    temp = str(value) + "°C"
     return temp
 
 @bot.inline_handler(func=lambda query: True)
