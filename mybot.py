@@ -14,7 +14,6 @@ from telebot import types
 
 bot = telebot.TeleBot(os.environ['token'])
 
-
 @bot.message_handler(commands=['help', 'help'])
 def send_help(message):
     res = "NAME\n" \
