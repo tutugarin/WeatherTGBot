@@ -10,6 +10,7 @@ bot = telebot.TeleBot(os.environ['token'])
 
 @bot.message_handler(commands=['help', 'help'])
 def send_help(message):
+
     res = "NAME\n" \
           "\t\t @FairBoobSize_bot\n" \
           "\n" \
@@ -31,15 +32,18 @@ def send_help(message):
 
 @bot.message_handler(commands=['cocksize', 'help'])
 def send_cock(message):
+
     bot.reply_to(message, randrange(40))
 
 
 def extract_arg(arg):
+
     return arg.split()[1:]
 
 
 @bot.message_handler(commands=['weather', 'help'])
 def send_weather(message):
+
     city = extract_arg(message.text)[0]
     url = 'https://wttr.in/{}?format=4'.format(city)
     res = requests.get(url).text
@@ -47,6 +51,7 @@ def send_weather(message):
 
 
 def convert_to_celsius(temp):
+
     if temp[-1] == 'F':
         value = int((int(temp[:-2]) - 32) * 5 / 9)
         temp = str(value) + "°C"
@@ -54,20 +59,22 @@ def convert_to_celsius(temp):
 
 
 def convert_to_mps(speed):
+
     if speed[-3:] == "mph":
         value = int(int(speed[1:-3]) / 2.237)
-        sp = speed[0] + str(value) + "m/s"
-        return sp
+        speed = speed[0] + str(value) + "m/s"
+        return speed
 
     if speed[-4:] == "km/h":
         value = int(int(speed[1:-4]) / 3.6)
-        sp = speed[0] + str(value) + "m/s"
-        return sp
+        speed = speed[0] + str(value) + "m/s"
+        return speed
     return speed
 
 
 @bot.inline_handler(func=lambda query: True)
 def query_text(query):
+
     if len(query.query) == 0:
         city = "Moscow, Russia"
     else:
@@ -80,9 +87,9 @@ def query_text(query):
         actual = convert_to_celsius(data[0])
         smile = data[1]
         feelslike = convert_to_celsius(data[2])
-        Wind = convert_to_mps(data[3])
-        Precipitation = data[4]
-        Pressure = data[5]
+        wind = convert_to_mps(data[3])
+        precipitation = data[4]
+        pressure = data[5]
         info_icon = "https://d279m997dpfwgl.cloudfront.net" \
                     "/wp/2017/12/weather_album-art-1000x1000.jpg"
         info = types.InlineQueryResultArticle(
@@ -96,7 +103,7 @@ def query_text(query):
                              "💧Precipitation: {}\n"
                              "🧭Pressure: {}\n"
                              "".format(city, smile, actual,
-                                       smile, feelslike, Wind, Precipitation, Pressure)),
+                                       smile, feelslike, wind, precipitation, pressure)),
             thumb_url=info_icon, thumb_width=48, thumb_height=48
         )
 
