@@ -20,9 +20,9 @@ def send_weather(message):
     bot.send_message(message.chat.id, res)
 
 def convert_celsius(temp):
-    if (temp[-1] == 'C'):
+    if temp[-1] == 'C':
         return temp
-    value = int(int(temp[:-2]) * 9 / 5 + 32)
+    value = int(int(temp[:-2] - 32) * 5 / 9)
     temp = str(value) + "°C"
     return temp
 
