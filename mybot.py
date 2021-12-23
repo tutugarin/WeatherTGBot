@@ -3,11 +3,11 @@
 # pylint: disable-msg=unused-wildcard-import
 # pylint: disable-msg=broad-except
 
-import re
 import os
 from random import randrange
 import requests
-from telebot import *
+import telebot
+from telebot import types
 
 bot = telebot.TeleBot(os.environ['token'])
 
@@ -94,7 +94,8 @@ def query_text(query):
                              "💧Precipitation: {}\n"
                              "🧭Pressure: {}\n"
                              "".format(city, data[1], convert_to_celsius(data[0]),
-                                       data[1], convert_to_celsius(data[2]), convert_to_mps(data[3]),
+                                       data[1], convert_to_celsius(data[2]),
+                                       convert_to_mps(data[3]),
                                        data[4], data[5])),
             thumb_url=info_icon, thumb_width=48, thumb_height=48
         )
