@@ -1,3 +1,5 @@
+# pylint: disable-msg=consider-using-f-string
+
 
 import re
 import os
@@ -10,7 +12,6 @@ bot = telebot.TeleBot(os.environ['token'])
 
 @bot.message_handler(commands=['help', 'help'])
 def send_help(message):
-    """Empty function docstring"""
     res = "NAME\n" \
           "\t\t @FairBoobSize_bot\n" \
           "\n" \
@@ -32,18 +33,15 @@ def send_help(message):
 
 @bot.message_handler(commands=['cocksize', 'help'])
 def send_cock(message):
-    """Empty function docstring"""
     bot.reply_to(message, randrange(40))
 
 
 def extract_arg(arg):
-    """Empty function docstring"""
     return arg.split()[1:]
 
 
 @bot.message_handler(commands=['weather', 'help'])
 def send_weather(message):
-    """Empty function docstring"""
     city = extract_arg(message.text)[0]
     url = 'https://wttr.in/{}?format=4'.format(city)
     res = requests.get(url).text
@@ -51,7 +49,6 @@ def send_weather(message):
 
 
 def convert_to_celsius(temp):
-    """Empty function docstring"""
     if temp[-1] == 'F':
         value = int((int(temp[:-2]) - 32) * 5 / 9)
         temp = str(value) + "°C"
@@ -59,7 +56,6 @@ def convert_to_celsius(temp):
 
 
 def convert_to_mps(speed):
-    """Empty function docstring"""
     if speed[-3:] == "mph":
         value = int(int(speed[1:-3]) / 2.237)
         speed = speed[0] + str(value) + "m/s"
@@ -74,7 +70,6 @@ def convert_to_mps(speed):
 
 @bot.inline_handler(func=lambda query: True)
 def query_text(query):
-    """Empty function docstring"""
     if len(query.query) == 0:
         city = "Moscow, Russia"
     else:
