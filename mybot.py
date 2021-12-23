@@ -22,7 +22,7 @@ def send_weather(message):
 def convert_celsius(temp):
     if temp[-1] == 'C':
         return temp
-    value = int(int(temp[:-2] - 32) * 5 / 9)
+    value = int((int(temp[:-2]) - 32) * 5 / 9)
     temp = str(value) + "°C"
     return temp
 
