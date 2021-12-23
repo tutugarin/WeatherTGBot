@@ -19,6 +19,8 @@ def send_weather(message):
     res = requests.get(url).text
     bot.send_message(message.chat.id, res)
 
+
+
 @bot.inline_handler(func=lambda query: True)
 def query_text(query):
     if (len(query.query) == 0):
@@ -28,7 +30,7 @@ def query_text(query):
     try:
         url = 'https://v2.wttr.in/{}?format=%t+%c+%f+%w+%p+%P'.format(city)
         data = (requests.get(url).text).split()
-        # print(city, data)
+        print(city, data)
 
         actual = data[0]
         smile = data[1]
