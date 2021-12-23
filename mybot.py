@@ -12,7 +12,7 @@ import requests
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot(os.environ['token'])
+bot = telebot.TeleBot(os.environ.get('TELEGRAM_BOT_TOKEN'))
 
 @bot.message_handler(commands=['help', 'help'])
 def send_help(message):
