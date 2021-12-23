@@ -89,7 +89,7 @@ def query_text(query):
             id='1', title="Detailed Weather",
             description="Weather in {}".format(city),
             input_message_content=types.InputTextMessageContent(
-                message_text="🙄Weather in {}🙄\n"
+                message_text="😱Weather in {}🙄\n"
                              "{}Actual {}\n"
                              "{}Feels Like {}\n"
                              "🌬Wind: {}\n"
@@ -102,7 +102,7 @@ def query_text(query):
             thumb_url=info_icon, thumb_width=48, thumb_height=48
         )
 
-        vanya_icon = "https://merriam-webster.com/" \
+        vanya_con = "https://merriam-webster.com/" \
                      "assets/mw/images/article/" \
                      "art-wap-landing-mp-lg/" \
                      "hot-take-2974-38ae3523b46f4055f2455dcdd5a1c92f@1x.jpg"
