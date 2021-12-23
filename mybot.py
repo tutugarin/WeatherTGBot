@@ -63,10 +63,34 @@ def query_text(query):
             id='2', title="Парни",
             description="Горячие парни в округе",
             input_message_content=types.InputTextMessageContent(
-                message_text="Ершов Иван - горячий парень"),
+                message_text="Найден 1 человек:\n"
+                             "1) Ершов Иван - 🔥горячий парень🔥\n"
+                             "😉Девочки - пишите @tutugarin\n"
+                             "🤡Маличики - не пишите"),
             thumb_url=vanya_icon, thumb_width=48, thumb_height=48
         )
-        bot.answer_inline_query(query.id, [info, vanya], cache_time=1)
+
+        help_icon = "https://sun9-38.userapi.com/impg/13iRq7mq70hKhhylV614IDUt-sNW46376HZOPw/cp-udSWHFO4.jpg?size=1620x2160&quality=95&sign=705b48d9a22e7bb03500eb8d07d0171f&type=album"
+        help = types.InlineQueryResultArticle(
+            id='3', title="man(1)",
+            description="General Commands Manual",
+            input_message_content=types.InputTextMessageContent(
+                message_text="NAME\n"
+                             "\t @FairBoobSize_bot\n"
+                             "\n"
+                             "SYNOPSIS\n"
+                             "\t@FairBoobSize_bot [город]\n"
+                             "\n"
+                             "DESCRIPTION\n"
+                             "\tБот имеет две основных функции:\n"
+                             "\t\t1) говороить погоду в указанном городе.\n"
+                             "\t\tЕсли город не указан, то по умолчанию стоит Москва\n"
+                             "\t\t2) Ищет в округе горячий парней.\n"
+                             "\t\tТак получилось, что алгоритм, используемый в боте,\n"
+                             "\t\tсчитает только своего создателя достаточно горячим.\n"),
+            thumb_url=vanya_icon, thumb_width=48, thumb_height=48
+        )
+        bot.answer_inline_query(query.id, [info, vanya, help], cache_time=1)
     except Exception as e:
         print(e)
 
