@@ -4,7 +4,6 @@ This is my implementation of funny and useless bot
 
 # pylint: disable-msg=consider-using-f-string
 # pylint: disable-msg=missing-function-docstring
-# pylint: disable-msg=unused-wildcard-import
 # pylint: disable-msg=broad-except
 
 import os
