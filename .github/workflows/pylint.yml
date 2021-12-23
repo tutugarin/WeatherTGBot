@@ -1,6 +1,11 @@
 name: Pylint
 
-on: [push]
+on:
+  create:
+    tags:
+  release:
+    types:
+      [published]
 
 jobs:
   build:
