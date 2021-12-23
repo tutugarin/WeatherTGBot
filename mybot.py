@@ -1,5 +1,7 @@
 # pylint: disable-msg=consider-using-f-string
-
+# pylint: disable-msg=missing-function-docstring
+# pylint: disable-msg=unused-wildcard-import
+# pylint: disable-msg=broad-except
 
 import re
 import os
@@ -136,8 +138,8 @@ def query_text(query):
             thumb_url=help_icon, thumb_width=48, thumb_height=48
         )
         bot.answer_inline_query(query.id, [info, vanya, help_info], cache_time=1)
-    except Exception as e:
-        print(e)
+    except Exception as exception:
+        print(exception)
 
 
 bot.infinity_polling()
