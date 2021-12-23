@@ -1,6 +1,6 @@
-import requests
 import re
 import os
+import requests
 from telebot import *
 from random import randrange
 
@@ -67,7 +67,7 @@ def convert_to_mps(sp):
 
 @bot.inline_handler(func=lambda query: True)
 def query_text(query):
-    if (len(query.query) == 0):
+    if len(query.query) == 0:
         city = "Moscow, Russia"
     else:
         city = query.query
@@ -82,7 +82,8 @@ def query_text(query):
         Wind = convert_to_mps(data[3])
         Precipitation = data[4]
         Pressure = data[5]
-        info_icon = "https://d279m997dpfwgl.cloudfront.net/wp/2017/12/weather_album-art-1000x1000.jpg"
+        info_icon = "https://d279m997dpfwgl.cloudfront.net" \
+                    "/wp/2017/12/weather_album-art-1000x1000.jpg"
         info = types.InlineQueryResultArticle(
             id='1', title="Detailed Weather",
             description="Weather in {}".format(city),
@@ -93,11 +94,15 @@ def query_text(query):
                              "🌬Wind: {}\n"
                              "💧Precipitation: {}\n"
                              "🧭Pressure: {}\n"
-                             "".format(city, smile, actual, smile, feelslike, Wind, Precipitation, Pressure)),
+                             "".format(city, smile, actual,
+                                       smile, feelslike, Wind, Precipitation, Pressure)),
             thumb_url=info_icon, thumb_width=48, thumb_height=48
         )
 
-        vanya_icon = "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/hot-take-2974-38ae3523b46f4055f2455dcdd5a1c92f@1x.jpg"
+        vanya_icon = "https://merriam-webster.com/" \
+                     "assets/mw/images/article/" \
+                     "art-wap-landing-mp-lg/" \
+                     "hot-take-2974-38ae3523b46f4055f2455dcdd5a1c92f@1x.jpg"
         vanya = types.InlineQueryResultArticle(
             id='2', title="Парни",
             description="Горячие парни в округе",
